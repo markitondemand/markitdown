@@ -1,0 +1,11 @@
+{
+	"name": "markitdown",
+	"description": "Convert GFL (github flavored markdown) to html.",
+	"bin": "./bin/markitdown",
+	"author": "ben",
+	"version": "0.0.1",
+	"dependencies": {
+		"optimist": "~0.3",
+		"mkdirp": "~0.3"
+	}
+}

@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+var optimist = require('optimist');
+var redcarpet = require('../redcarpet');
+
+var argv = optimist
+.usage('\n\
+Convert GFL (github flavored markdown) to html.\n\
+Files will be written with the same name and a .html exension\n\n\
+Usage: $0 inputFile.mds\n\
+')
+.demand(1)
+.describe('o', 'Overwrite? Suppress prompts for file overwrites.')
+.describe('p', 'Output path.')
+.argv;
+
+// console.warn(argv)
+
+
+redcarpet(argv._, argv.o, argv.p);
+
+process.on('exit', function(exitCode) {
+	console.warn('Donesky!');
+});
