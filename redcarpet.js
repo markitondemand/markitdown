@@ -3,8 +3,8 @@ var path = require('path');
 var spawn = require('child_process').spawn;
 var mkdirp = require('mkdirp');
 
-var header = fs.readFileSync(path.join(__dirname, './templates/header.html'));
-var footer = fs.readFileSync(path.join(__dirname, './templates/footer.html'));
+var header = fs.readFileSync(path.join(__dirname, './templates/basic/header.html'));
+var footer = fs.readFileSync(path.join(__dirname, './templates/basic/footer.html'));
 
 var extensions = /\.(md|markdown)$/i;
 
@@ -29,6 +29,8 @@ function markitdown(inputFile, overwrite, outPath) {
 
 	rubyRed.stdout.pipe(out, { end: false });
 	fs.createReadStream(inputFile).pipe(rubyRed.stdin);
+
+	rubyRed.stderr.pipe(process.stderr);
 }
 
 function checkPath(inputPath, overwrite, outPath, prefix) {
