@@ -9,20 +9,40 @@ var reInclude = /(?:^|\n)@include\s(.*)\r*\n/;
 // eventually
 var includeCache = {};
 
-function markitdown(inputFile, overwrite, outPath) {
+function markitdown(inputFile, overwrite, outPath, options) {
 	var outputFile = path.join(outPath, inputFile.replace(extensions, '.html'));
 
-	var pandoc = spawn('pandoc', [
+	var args = [
 		// inputFile,
 		// '-o', outputFile,
-		'--toc',
+		// 
+		//'--toc',
 		'-t', 'html5',
 		'--tab-stop', '4',
 		'--standalone',
 		'--highlight-style', 'pygments',
+		'--section-divs',
 		// '-T', 'node-dcl',
-		'-c', 'test.css'
-	]);
+		// '-c', 'test.css'
+	];
+
+	if (options.head) {
+		args.push('--include-in-header', options.head);
+	}
+
+	if (options.header) {
+		args.push('--include-before-body', options.header);
+	}
+
+	if (options.footer) {
+		args.push('--include-after-body', options.footer);	
+	}
+
+	if (options.title) {
+		args.push('-T', options.title);
+	}
+
+	var pandoc = spawn('pandoc', args);
 
 	var outstream = (outputFile) 
 		? fs.createWriteStream(outputFile)
@@ -57,7 +77,8 @@ function markitdown(inputFile, overwrite, outPath) {
 	pandoc.stderr.pipe(process.stderr);	
 }
 
-function checkPath(inputPath, overwrite, outPath, prefix) {
+// todo consolidate into one options object
+function checkPath(inputPath, overwrite, outPath, prefix, options) {
 	// temp
 	overwrite = true;
 	prefix = prefix || '';
@@ -74,7 +95,7 @@ function checkPath(inputPath, overwrite, outPath, prefix) {
 
 			if (stats.isDirectory()) {
 				fs.readdir(ipath, function(err, files) {
-					checkPath(files, overwrite, outPath, ipath);
+					checkPath(files, overwrite, outPath, ipath, options);
 				});
 			}
 			else {
@@ -84,7 +105,7 @@ function checkPath(inputPath, overwrite, outPath, prefix) {
 							console.warn(err);
 							return;
 						}
-						markitdown(ipath, overwrite, outPath);
+						markitdown(ipath, overwrite, outPath, options);
 					})
 				}
 			}

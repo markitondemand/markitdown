@@ -7,8 +7,5 @@
 	"dependencies": {
 		"optimist": "~0.3",
 		"mkdirp": "~0.3"
-	},
-	"scripts": {
-		"install": "sudo ./install.sh"
 	}
 }

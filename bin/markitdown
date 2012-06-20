@@ -1,22 +1,31 @@
 #!/usr/bin/env node
 var optimist = require('optimist');
-var redcarpet = require('../redcarpet');
+var pandoc = require('../pandoc');
 
 var argv = optimist
 .usage('\n\
-Convert GFL (github flavored markdown) to html.\n\
+Convert markdown to html courtesy of pandoc.\n\
 Files will be written with the same name and a .html exension\n\n\
-Usage: $0 inputFile.mds\n\
+Usage: $0 inputFile.md\n\
 ')
 .demand(1)
-.describe('o', 'Overwrite? Suppress prompts for file overwrites.')
-.describe('p', 'Output path.')
+// .describe('o', 'Overwrite? Suppress prompts for file overwrites.')
+.describe('output-path', 'Output path.')
+.describe('head', 'file to be included in <head>')
+.describe('header', 'file to be included just after opening <body>')
+.describe('footer', 'file to be included just before end of </body>')
+.describe('title', 'prepend <title> tags with this value')
 .argv;
 
 // console.warn(argv)
 
 
-redcarpet(argv._, argv.o, argv.p);
+pandoc(argv._, argv.o, argv['output-path'], null, {
+	head: argv.head,
+	header: argv.header,
+	footer: argv.footer,
+	title: argv.title
+});
 
 process.on('exit', function(exitCode) {
 	console.warn('Donesky!');
