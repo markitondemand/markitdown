@@ -1,11 +1,18 @@
 {
 	"name": "markitdown",
-	"description": "Convert GFL (github flavored markdown) to html.",
+	"description": "Convert GFL (github flavored markdown) to html using pandoc.",
 	"bin": "./bin/markitdown",
-	"author": "ben",
+	"author": "Ben Taber <ben.taber@markit.com>",
 	"version": "0.0.1",
+
 	"dependencies": {
 		"optimist": "~0.3",
 		"mkdirp": "~0.3"
-	}
+	},
+
+	"preferGlobal": true,
+
+	"engines": {
+		"node": ">=0.6.0"
+	},
 }
