@@ -4,7 +4,7 @@ A thin wrapper around pandoc to help you convert markdown into web pages.
 
 ## Dependencies
 
-1. Node.js (http://nodejs.org/#download)
+1. Node.js (http://nodejs.org/)
 2. Pandoc (http://johnmacfarlane.net/pandoc/installing.html)
 
 ## Install
@@ -26,7 +26,7 @@ $> npm install markitdown -g
 	  --head         file to be included in <head>                 
 	  --header       file to be included just after opening <body> 
 	  --footer       file to be included just before end of </body>
-	  --title        prepend <title> tags with this valu
+	  --title        prepend <title> tags with this value
 
 ## Examples
 
