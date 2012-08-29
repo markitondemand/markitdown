@@ -9,6 +9,8 @@ var reInclude = /(?:^|\n)@include\s(.*)\r*\n/;
 // eventually
 var includeCache = {};
 
+process.stderr.setMaxListeners(0);
+
 function markitdown(inputFile, overwrite, outPath, options) {
 	var outputFile = path.join(outPath, inputFile.replace(extensions, '.html'));
 
