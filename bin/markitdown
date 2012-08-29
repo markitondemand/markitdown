@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 var optimist = require('optimist');
 var pandoc = require('../pandoc');
+var pkg = require('../package');
 
 var argv = optimist
 .usage('\n\
@@ -8,17 +9,27 @@ Convert markdown to html courtesy of pandoc.\n\
 Files will be written with the same name and a .html exension\n\n\
 Usage: $0 inputFile.md\n\
 ')
-.demand(1)
 // .describe('o', 'Overwrite? Suppress prompts for file overwrites.')
 .describe('output-path', 'Output path.')
 .describe('head', 'file to be included in <head>')
 .describe('header', 'file to be included just after opening <body>')
 .describe('footer', 'file to be included just before end of </body>')
 .describe('title', 'prepend <title> tags with this value')
+.describe('version', 'output version and exit')
 .argv;
 
 // console.warn(argv)
 
+if (argv.version) {
+	console.warn('v' + pkg.version)
+	process.exit();
+}
+
+if (!argv._.length) {
+	optimist.showHelp();
+	console.warn('Input markdown file(s) not specified.')
+	process.exit();
+}
 
 pandoc(argv._, argv.o, argv['output-path'], null, {
 	head: argv.head,
