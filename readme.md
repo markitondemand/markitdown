@@ -27,6 +27,7 @@ $> npm install markitdown -g
 	  --header       file to be included just after opening <body> 
 	  --footer       file to be included just before end of </body>
 	  --title        prepend <title> tags with this value
+	  --docTemplate  file to be used instead of default pandoc template
 
 ## Examples
 

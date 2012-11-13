@@ -13,6 +13,7 @@ process.stderr.setMaxListeners(0);
 
 function markitdown(inputFile, overwrite, outPath, options) {
 	var outputFile = path.join(outPath, inputFile.replace(extensions, '.html'));
+
 	var args = [
 		'-t', 'html5',
 		'--tab-stop', '4',
@@ -20,6 +21,10 @@ function markitdown(inputFile, overwrite, outPath, options) {
 		'--highlight-style', 'pygments',
 		'--section-divs'
 	];
+
+	if (options.docTemplate){
+		args.push('--template', options.docTemplate);
+	}
 
 	if (options.head) {
 		args.push('--include-in-header', options.head);
@@ -35,10 +40,6 @@ function markitdown(inputFile, overwrite, outPath, options) {
 
 	if (options.title) {
 		args.push('-T', options.title);
-	}
-
-	if (options.docTemplate){
-		args.push('--template', options.docTemplate);
 	}
 
 	var pandoc = spawn('pandoc', args);
