@@ -15,8 +15,8 @@ Usage: $0 inputFile.md\n\
 .describe('header', 'file to be included just after opening <body>')
 .describe('footer', 'file to be included just before end of </body>')
 .describe('title', 'prepend <title> tags with this value')
-.describe('version', 'output version and exit')
 .describe('docTemplate','file to be used as template (optional)')
+.describe('version', 'output version and exit')
 .argv;
 
 // console.warn(argv)
