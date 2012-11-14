@@ -15,18 +15,16 @@ function markitdown(inputFile, overwrite, outPath, options) {
 	var outputFile = path.join(outPath, inputFile.replace(extensions, '.html'));
 
 	var args = [
-		// inputFile,
-		// '-o', outputFile,
-		// 
-		//'--toc',
 		'-t', 'html5',
 		'--tab-stop', '4',
 		'--standalone',
 		'--highlight-style', 'pygments',
-		'--section-divs',
-		// '-T', 'node-dcl',
-		// '-c', 'test.css'
+		'--section-divs'
 	];
+
+	if (options.docTemplate){
+		args.push('--template', options.docTemplate);
+	}
 
 	if (options.head) {
 		args.push('--include-in-header', options.head);

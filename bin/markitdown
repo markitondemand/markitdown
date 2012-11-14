@@ -16,6 +16,7 @@ Usage: $0 inputFile.md\n\
 .describe('footer', 'file to be included just before end of </body>')
 .describe('title', 'prepend <title> tags with this value')
 .describe('version', 'output version and exit')
+.describe('docTemplate','file to be used as template (optional)')
 .argv;
 
 // console.warn(argv)
@@ -35,7 +36,8 @@ pandoc(argv._, argv.o, argv['output-path'], null, {
 	head: argv.head,
 	header: argv.header,
 	footer: argv.footer,
-	title: argv.title
+	title: argv.title,
+	docTemplate: argv.docTemplate
 });
 
 process.on('exit', function(exitCode) {
