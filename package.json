@@ -3,7 +3,7 @@
 	"description": "Convert GFL (github flavored markdown) to html using pandoc.",
 	"bin": "./bin/markitdown",
 	"author": "Ben Taber <ben.taber@markit.com>",
-	"version": "0.0.5",
+	"version": "0.0.4",
 
 	"dependencies": {
 		"optimist": "~0.3",
