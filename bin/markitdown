@@ -41,5 +41,7 @@ pandoc(argv._, argv.o, argv['output-path'], null, {
 });
 
 process.on('exit', function(exitCode) {
-	console.warn('Donesky!');
+	if (exitCode === 0) {
+		console.warn('Donesky!');
+	}
 });

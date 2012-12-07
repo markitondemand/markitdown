@@ -44,6 +44,13 @@ function markitdown(inputFile, overwrite, outPath, options) {
 
 	var pandoc = spawn('pandoc', args);
 
+	pandoc.on('exit', function(exitCode) {
+		if (127 == exitCode) {
+			console.log('Pandoc not found in your path. Please install from http://johnmacfarlane.net/pandoc/installing.html');
+			process.exit(1);
+		}
+	});
+
 	var outstream = (outputFile) 
 		? fs.createWriteStream(outputFile)
 		: process.stdout
