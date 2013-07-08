@@ -2,6 +2,8 @@
 
 A thin wrapper around pandoc to help you convert markdown into web pages.
 
+[![NPM version](https://badge.fury.io/js/markitdown.png)](http://badge.fury.io/js/markitdown)
+
 ## Dependencies
 
 1. Node.js (http://nodejs.org/)
